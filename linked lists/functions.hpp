@@ -32,4 +32,15 @@ class LinkedList{
 
 			this->tail = node;		 
 		}
+
+		void print(LinkedList* head)
+		{
+			LinkedList* node = head;
+			while(node)
+			{
+
+				cout<<node->data<<"\n";
+				node = node->next;
+			}	
+		}
 }
