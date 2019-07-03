@@ -60,4 +60,17 @@ class LinkedList{
             		}
 			 
 		}
+		void insertAtHead(Node* head,int data)
+		{
+			
+			Node* new_node = new Node(data);
+			if(head == nullptr)
+                		head = new_node;
+            		else    
+            		{   
+                		new_node->next = head;
+                		head = new_node;
+            		}
+		}
+	
 }
