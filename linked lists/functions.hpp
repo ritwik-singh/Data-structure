@@ -43,4 +43,21 @@ class LinkedList{
 				node = node->next;
 			}	
 		}
+	
+		void insertAtTail(Node* head,int data)
+		{
+			Node* node = head;
+			Node* new_node = new Node(data);
+			if(head == nullptr)
+                		head = new_node;
+            		else    
+            		{   
+				while(node->next != nullptr)
+                    		node = node->next;
+            
+                		node->next = new_node;
+                		tail = node;
+            		}
+			 
+		}
 }
