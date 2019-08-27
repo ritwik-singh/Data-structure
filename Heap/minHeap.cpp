@@ -1,3 +1,10 @@
+/*
+	* @author [Ritwik Singh]
+ 	* @created date 2019-08-26 08:30:15
+ 	* @modified date 2019-08-27 08:58:45
+ 	* @desc [description]
+*/
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -38,7 +45,7 @@ minHeap::minHeap(int capacity)
 }
 
 
-minHeap::decreaseKey(int i,int val)
+void minHeap::decreaseKey(int i,int val)
 {
 	heap[i] = val;
 	while(i != 0 && heap[parent(i)] > heap[i])
@@ -48,23 +55,50 @@ minHeap::decreaseKey(int i,int val)
 	}
 }
 
-minHeap::minHeapify(int i)
+void minHeap::minHeapify(int i)
 {
+		int l = left(i);
+		int r = right(i);
+		int smallest;
+		if(l < size && heap[l] < heap[i])
+			smallest = l;
+		else
+			smallest = i;
+		if(r < size && heap[r] < heap[smallest])
+			smallest = r;
 
+		if(smallest != i)
+		{
+			swap(&heap[i],&heap[smallest]);
+			minHeapify(smallest);
+		}		 
+}	
+
+int minHeap::extractMin()
+{
+	if(size <= 0)
+		return INT_MAX;
+	if(size == 1)
+	{
+		size--;
+		return heap[0];
+	}	 
+
+	int root  = heap[0];
+	heap[0] = heap[size-1];
+	size--;
+	minHeapify(0);
+
+	return root;
 }
 
-minHeap::extractMin()
-{
-
-}
-
-minHeap::deleteKey()
+void minHeap::deleteKey()
 {
 	decreaseKey(i,INT_MIN);
 	extractMin();
 }
 
-minHeap::insertKey()
+void minHeap::insertKey()
 {
 	if(size == n)
 	{
@@ -86,22 +120,22 @@ minHeap::insertKey()
 }
 
 
-minHeap::left(int i)
+int minHeap::left(int i)
 {
 	return (2*i+1);
 }
 
-minHeap::right(int i)
+int minHeap::right(int i)
 {
 	return (2*i+2);
 }
 
-minHeap::parent(int i)
+int minHeap::parent(int i)
 {
 	return (i-1)/2;
 }
 
-minHeap::getMin()
+int minHeap::getMin()
 {
 	return heap[0];
 }
